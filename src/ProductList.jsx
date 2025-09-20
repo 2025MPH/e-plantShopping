@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ProductList.css';
 import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from './CreateSlice';
+import { addItem } from './CartSlice';
 
 function ProductList(props) {
   const [showCart, setShowCart] = useState(false);
@@ -23,7 +23,7 @@ function ProductList(props) {
   const totalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
-  
+
     const plantsArray = [
         {
             category: "Air Purifying Plants",
