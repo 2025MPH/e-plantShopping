@@ -25,7 +25,11 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleDecrement = (item) => {
-    dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    if (item.quantity > 1) {
+      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    } else {
+      dispatch(removeItem({ name: item.name }));
+    }
   };
 
   const handleRemove = (item) => {
@@ -40,9 +44,11 @@ const CartItem = ({ onContinueShopping }) => {
     alert('Coming Soon!');
   };
 
+  const totalPlants = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <div className="cart-container">
-      <h2 style={{ color: 'black' }}>Total Plants : {cart.length}</h2>
+      <h2 style={{ color: 'black' }}>Total Plants: {totalPlants}</h2>
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
       <div>
         {cart.map((item) => (
